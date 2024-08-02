@@ -13,7 +13,6 @@ A contract that verifies signatures from a trusted server and distributes reward
 ### Setup
 1. Install dependencies:
 ```bash
-Copy code
 npm install
 ```
 2. Configure environment variables in `.env` file (see `.env.example`)
