@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 import { getNonce } from "./helpers";
 import dotenv from "dotenv";
 dotenv.config();
@@ -7,15 +7,18 @@ const privateKey = process.env.LOCALHOST_PK ?? "";
 
 const wallet = new ethers.Wallet(privateKey);
 
-async function signMessage(user: string, amount: number, chainId: number): Promise<string> {
+async function signMessage(
+  user: string,
+  amount: number,
+  chainId: number,
+): Promise<string> {
+  const nonce = await getNonce(user);
 
-    const nonce = await getNonce(user);
+  const message = ethers.solidityPackedKeccak256(
+    ["address", "uint256", "uint256", "uint256"],
+    [wallet.address, amount, nonce, chainId],
+  );
+  const messageHashBin = ethers.getBytes(message);
 
-    const message = ethers.solidityPackedKeccak256(
-        ['address', 'uint256', 'uint256', 'uint256'],
-        [wallet.address, amount, nonce, chainId]
-    );
-    const messageHashBin = ethers.getBytes(message);
-
-    return await wallet.signMessage(messageHashBin);
+  return await wallet.signMessage(messageHashBin);
 }
