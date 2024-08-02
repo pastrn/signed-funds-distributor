@@ -18,8 +18,7 @@ const config: HardhatUserConfig = {
   networks: {
     localhost: {
       url: process.env.LOCALHOST_RPC,
-      // @ts-ignore
-      accounts: [process.env.LOCALHOST_PK]
+      accounts: [process.env.LOCALHOST_PK ?? ""]
     },
   }
 };

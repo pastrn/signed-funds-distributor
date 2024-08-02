@@ -3,9 +3,8 @@ import { getNonce } from "./helpers";
 import dotenv from "dotenv";
 dotenv.config();
 
-const privateKey = process.env.LOCALHOST_PK;
+const privateKey = process.env.LOCALHOST_PK ?? "";
 
-// @ts-ignore
 const wallet = new ethers.Wallet(privateKey);
 
 async function signMessage(user: string, amount: number, chainId: number): Promise<string> {
