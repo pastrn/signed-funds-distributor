@@ -19,7 +19,6 @@ async function main() {
   );
   await distributor.waitForDeployment();
   const distributorAddress = await distributor.getAddress();
-  await distributor.mockEvents();
   console.log("FundsDistributor deployed to:", distributorAddress);
 }
 

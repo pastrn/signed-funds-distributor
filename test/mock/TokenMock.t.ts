@@ -24,7 +24,7 @@ describe("Contract TokenMock", async () => {
     token = token.connect(deployer) as Contract;
 
     return {
-      token,
+      token
     };
   }
 
@@ -43,9 +43,7 @@ describe("Contract TokenMock", async () => {
       const { token } = await loadFixture(deployToken);
 
       const balanceBefore: bigint = await token.balanceOf(deployer.address);
-      await expect(
-        token.mint(deployer.address, MINT_AMOUNT),
-      ).to.changeTokenBalance(token, deployer, MINT_AMOUNT);
+      await expect(token.mint(deployer.address, MINT_AMOUNT)).to.changeTokenBalance(token, deployer, MINT_AMOUNT);
       const balanceAfter: bigint = await token.balanceOf(deployer.address);
 
       expect(balanceAfter).to.eq(balanceBefore + BigInt(MINT_AMOUNT));
